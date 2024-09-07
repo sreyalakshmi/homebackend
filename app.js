@@ -4,6 +4,8 @@ const cors=require("cors")
 const bcrypt=require("bcrypt")
 const jwt=require("jsonwebtoken")
 const{usermodel}=require("./Models/user")
+const { loginModel } = require("./Models/admin")
+
 
 const app=express()
 app.use(cors())
@@ -53,6 +55,15 @@ app.post("/signin",(req,res)=>{
          }
     ).catch()
  })
+ app.post("/adminsignUp",(req,res)=>{
+    let input=req.body
+    let hashedpassword=bcrypt.hashSync(input.password,12)
+    input.password=hashedpassword
+    console.log(input)
+    let result=new loginModel(input)
+    result.save()
+    res.json({"status":"success"})
+})
 app.listen(8080,()=>{
     console.log("server started")
 })
