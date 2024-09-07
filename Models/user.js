@@ -9,5 +9,5 @@ const schema=mongoose.Schema(
         
     }
 )
-let registermodel=mongoose.model("registers",schema)
-    module.exports={registermodel}
+let usermodel=mongoose.model("uers",schema)
+    module.exports={usermodel}
